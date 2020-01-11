@@ -1,0 +1,35 @@
+spring:
+  application:
+    name: Spring Security Api
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: '*'
+      base-path: /_monitoring
+  health:
+    defaults:
+      enabled: true
+
+api:
+  authorization:
+    users:
+      caglartelef:
+        password: "{noop}caglartelef"
+        config:
+          timeout: false
+          roles:
+            - ROLE_ADMIN
+      rabiayurdakultelef:
+        password: "{noop}rabiayurdakultelef"
+        config:
+          timeout: false
+          roles:
+            - ROLE_ADMIN
+      bahadirtelef:
+        password: "{noop}bahadirtelef"
+        config:
+          timeout: true
+          roles:
+            - ROLE_SECADMIN
