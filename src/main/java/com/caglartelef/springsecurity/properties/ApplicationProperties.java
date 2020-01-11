@@ -5,7 +5,7 @@ import org.springframework.boot.context.properties.ConfigurationProperties;
 import java.util.HashMap;
 import java.util.Map;
 
-@ConfigurationProperties(prefix = "api.authorization")
+@ConfigurationProperties(prefix = "api.authorization")/** Get authorization infos in application.yaml.*/
 public class ApplicationProperties {
     private Map<String, User> users = new HashMap<>();
 
@@ -16,6 +16,10 @@ public class ApplicationProperties {
     public void setUsers(Map<String, User> users) {
         this.users = users;
     }
+
+    /**
+     * User class
+     * */
 
     public static class User {
         private String password;
@@ -37,6 +41,10 @@ public class ApplicationProperties {
             this.config = config;
         }
     }
+
+    /**
+     * User config class
+     * */
 
     public static class UserConfig {
         private boolean timeout;

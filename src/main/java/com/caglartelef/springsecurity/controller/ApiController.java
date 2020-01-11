@@ -13,12 +13,18 @@ public class ApiController {
     @Autowired
     private ConfigurationService configurationService;
 
+    /**
+     * This method provide to login for admin users.
+     * */
     @GetMapping(value = "/admin/login")
     public String adminLogin(){
         System.out.println(configurationService.getCurrentUserName());
         return configurationService.getCurrentUserName();
     }
 
+    /**
+     * This method provide to login for secondary admin users.
+     * */
     @GetMapping(value = "/secAdmin/login")
     public String secAdminLogin(){
         System.out.println(configurationService.getCurrentUserName());

@@ -20,6 +20,9 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
     @Autowired
     private ApplicationProperties properties;
 
+    /**
+     * This method checks the access information of users.
+     * */
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS).and().httpBasic()
@@ -28,20 +31,15 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                 .antMatchers(HttpMethod.GET, "/api/admin/login/**").hasRole("ADMIN")
                 .antMatchers(HttpMethod.GET, "/api/secAdmin/login/**").hasRole("SECADMIN")
                 .antMatchers(HttpMethod.GET, "/_monitoring/health/**").permitAll()
-                .antMatchers(
-                        "/v2/api-docs",
-                        "/configuration/ui",
-                        "/swagger-resources/**",
-                        "/configuration/security",
-                        "/swagger-ui.html",
-                        "/webjars/**").permitAll()
                 .anyRequest().denyAll()
                 .and()
                 .csrf().disable()
                 .formLogin().disable();
     }
 
-
+    /**
+     * This method provide ignore to swagger configuration.
+     * */
     @Override
     public void configure(WebSecurity web) {
         web.ignoring().antMatchers("/v2/api-docs",
@@ -52,7 +50,9 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                 "/webjars/**");
     }
 
-
+    /**
+     * This method allows users to login the system.
+     * */
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
         InMemoryUserDetailsManagerConfigurer<AuthenticationManagerBuilder> builder = auth.inMemoryAuthentication();
         Map<String, ApplicationProperties.User> users = properties.getUsers();
